@@ -14,12 +14,14 @@ final class JournalDbController {
 //
 //    }
     
-    func read(index: Int) -> Entry? {
-        if let entry = entries.get(index: index)  {
-            return entry
-        }
-        return nil
-    }
+//    func read(index: Int) -> Entry? {
+//        if let entry = entries.get(index: index)  {
+//            return entry
+//        }
+//        return nil
+//    }
+
+
     
 //        func update(index: Int, entry: Entry) -> Entry? {
 //            if let entry = entries.get(index: index) {
@@ -46,3 +48,4 @@ final class JournalDbController {
 //            return nil
 //        }
 //    }
+}

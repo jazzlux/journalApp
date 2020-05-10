@@ -13,9 +13,8 @@ final class JournalEntry : MySQLModel {
     }
     
     
-    
 }
 
-extension Migration {}
-extension Content {}
-extension Parameter{}
+extension JournalEntry: Migration {}
+extension JournalEntry: Content {}
+extension JournalEntry: Parameter{}

@@ -3,7 +3,10 @@ import Vapor
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
     
-    let journalRoutes = JournalRoutes()
+//    let journalRoutes = JournalRoutes()
+//    try router.register(collection: journalRoutes)
+    
+    let journalRoutes = JournalDbRoutes()
     try router.register(collection: journalRoutes)
     
     
