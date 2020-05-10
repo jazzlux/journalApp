@@ -1,1 +1,1 @@
-
+journalApp server side
