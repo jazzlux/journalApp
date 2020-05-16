@@ -33,7 +33,9 @@ struct ApiRoutes: RouteCollection {
     
     
     func newEntry(_ req: Request) throws -> Future<JournalEntry> {
+//        print(req)
         return try req.content.decode(JournalEntry.self).flatMap(to: JournalEntry.self) { entry in
+
             return entry.save(on: req)
         }
     }
@@ -65,7 +67,7 @@ struct ApiRoutes: RouteCollection {
             return entry.delete(on: req).transform(to: HTTPStatus.noContent)
         }
     }
-    
+        
 }
 
 
