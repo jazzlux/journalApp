@@ -2,17 +2,24 @@ import Vapor
 
 struct ApiRoutes: RouteCollection {
     
-    
     func boot(router: Router) throws {
-        let apiRouter = router.grouped("/api")
- 
         
+        let userController = UserController()
+        router.get("createUser", use: userController.createUser)
+        router.get("loginUser", use: userController.loginUser)
+        
+//
+        let apiRouter = router.grouped("/api")
+//        let token = User.tokenAuthMiddleware()
+
         //Public routes
         let publicRouter = apiRouter.grouped("/journal")
         publicRouter.get("", use: getAll)
         
         //Admin routes
         let adminRouter = apiRouter.grouped("/admin")
+        // Create a route closure wrapped by this middleware
+  
         adminRouter.get(Int.parameter, use: getEntry)
         adminRouter.post(use: newEntry)
         adminRouter.put(Int.parameter, use: editEntry)

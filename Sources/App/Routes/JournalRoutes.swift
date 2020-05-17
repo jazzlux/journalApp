@@ -5,11 +5,11 @@ struct  JournalRoutes: RouteCollection {
     let journal = JournalController()
     
     func boot(router: Router) throws {
-        let topRouter = router.grouped("journal")
+        let topRouter = router.grouped("/journal")
         topRouter.get(use: getTotal)
         topRouter.post(use: newEntry)
         
-        let entryRouter = router.grouped("journal", Int.parameter)
+        let entryRouter = router.grouped("/journal", Int.parameter)
         entryRouter.get(use: getEntry)
         entryRouter.post(use: editEntry)
         entryRouter.delete(use: removeEntry)
