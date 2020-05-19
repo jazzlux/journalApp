@@ -36,6 +36,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     var migrations = MigrationConfig()
     migrations.add(model: JournalEntry.self, database: .mysql)
     migrations.add(model: User.self, database: .mysql)
+    migrations.add(model: Token.self, database: .mysql)
     services.register(migrations)
     
     

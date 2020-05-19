@@ -1,3 +1,4 @@
+import Foundation
 import Vapor
 import FluentMySQL
 import Authentication
@@ -26,4 +27,17 @@ extension User: PasswordAuthenticatable {
         return \User.password
     }
 }
+
+extension User: TokenAuthenticatable {
+    typealias TokenType = Token
+}
+
+extension User {
+    
+    struct PublicUser: Content {
+        var username: String
+        var token: String
+    }
+}
+
 

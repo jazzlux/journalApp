@@ -5,8 +5,19 @@ struct ApiRoutes: RouteCollection {
     func boot(router: Router) throws {
         
         let userController = UserController()
-        router.get("createUser", use: userController.createUser)
+        router.post("createUser", use: userController.createUser)
         router.get("loginUser", use: userController.loginUser)
+        
+        
+        let tokenAuthenticationMiddleware = User.tokenAuthMiddleware() // 1
+        let authedRoutes = router.grouped(tokenAuthenticationMiddleware) // 2
+        authedRoutes.get("this/protected/route") { request -> Future<User.PublicUser> in
+            let user = try request.requireAuthenticated(User.self) // 3
+            return try user.authTokens.query(on: request).first().map(to: User.PublicUser.self) { userTokenType in // 4
+                guard let tokenType = userTokenType?.token else { throw Abort.init(HTTPResponseStatus.notFound) }
+                return User.PublicUser(username: user.username, token: tokenType) // 5
+            }
+        }
         
 //
         let apiRouter = router.grouped("/api")
